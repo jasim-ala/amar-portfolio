@@ -646,10 +646,83 @@ h1, h2, h3, h4 {
     font-size: 0.9rem;
 }
 
+/* Sub-Skills (AV Technician) */
+.av-card {
+    padding: 3rem;
+}
+
+.av-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.av-header i {
+    width: 48px;
+    height: 48px;
+    color: var(--accent-emerald);
+}
+
+.av-desc {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    margin-bottom: 2.5rem;
+    font-style: italic;
+}
+
+.summit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.summit-item h4 {
+    color: var(--accent-gold);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.summit-item p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Additional Skills */
+.skills-flex-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-list-minimal, .lang-minimal, .edu-minimal {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.skill-list-minimal span, .lang-minimal p, .edu-minimal p {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+}
+
+.skill-list-minimal span::before {
+    content: '•';
+    color: var(--accent-emerald);
+    margin-right: 0.75rem;
+}
+
 /* Responsive */
 @media (max-width: 992px) {
     .hero-title { font-size: 3.5rem; }
-    .about-grid, .contact-wrapper, .education-grid, .lang-license-grid {
+    .about-grid, .contact-wrapper, .education-grid, .lang-license-grid, .summit-grid {
         grid-template-columns: 1fr;
     }
 }
