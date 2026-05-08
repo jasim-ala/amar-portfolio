@@ -559,10 +559,97 @@ h1, h2, h3, h4 {
     color: var(--accent-emerald);
 }
 
+/* Education */
+.education-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.edu-card {
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.edu-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-emerald);
+}
+
+.edu-card i {
+    color: var(--accent-emerald);
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1.5rem;
+}
+
+.edu-date {
+    display: block;
+    color: var(--accent-gold);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* Languages & License */
+.lang-license-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.lang-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.lang-item span {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(to right, var(--accent-emerald), var(--accent-gold));
+    border-radius: 4px;
+}
+
+.license-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.license-info i {
+    color: var(--accent-emerald);
+    width: 40px;
+    height: 40px;
+}
+
+.license-info h4 {
+    margin-bottom: 0.25rem;
+}
+
+.license-info p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
 /* Responsive */
 @media (max-width: 992px) {
     .hero-title { font-size: 3.5rem; }
-    .about-grid, .contact-wrapper {
+    .about-grid, .contact-wrapper, .education-grid, .lang-license-grid {
         grid-template-columns: 1fr;
     }
 }
