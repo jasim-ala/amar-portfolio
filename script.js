@@ -4,6 +4,8 @@ lucide.createIcons();
 // Three.js Background
 const initThree = () => {
     const container = document.getElementById('canvas-container');
+    if (!container) return;
+    
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -102,36 +104,42 @@ const initThree = () => {
 
 // GSAP Animations
 const initAnimations = () => {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    
     gsap.registerPlugin(ScrollTrigger);
 
     // Hero Fade In
     gsap.from('.hero-content > *', {
-        y: 50,
+        y: 40,
         opacity: 0,
         duration: 1,
-        stagger: 0.2,
+        stagger: 0.15,
         ease: 'power4.out'
     });
 
     // Section Reveal
     const revealSections = document.querySelectorAll('.section');
     revealSections.forEach(section => {
-        gsap.from(section.querySelectorAll('.glass-card, .skill-card, .timeline-item'), {
-            scrollTrigger: {
-                trigger: section,
-                start: 'top 80%',
-            },
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: 'power3.out'
-        });
+        const animTargets = section.querySelectorAll('.glass-card, .skill-card, .timeline-item, .cert-card, .project-card');
+        if (animTargets.length > 0) {
+            gsap.from(animTargets, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 82%',
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.9,
+                stagger: 0.15,
+                ease: 'power3.out'
+            });
+        }
     });
 
     // Navbar Effect
     window.addEventListener('scroll', () => {
         const nav = document.querySelector('.navbar');
+        if (!nav) return;
         if (window.scrollY > 50) {
             nav.classList.add('scrolled');
         } else {
@@ -140,28 +148,55 @@ const initAnimations = () => {
     });
 };
 
+// Mobile Navigation Toggle
+const initMobileNav = () => {
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const mobileDropdown = document.querySelector('.mobile-nav-dropdown');
+
+    if (!mobileBtn || !mobileDropdown) return;
+
+    mobileBtn.addEventListener('click', () => {
+        const isOpen = mobileDropdown.classList.toggle('active');
+        mobileBtn.innerHTML = isOpen ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+        lucide.createIcons();
+    });
+
+    mobileDropdown.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileDropdown.classList.remove('active');
+            mobileBtn.innerHTML = '<i data-lucide="menu"></i>';
+            lucide.createIcons();
+        });
+    });
+};
+
+// Contact Form Mockup
+const initContactForm = () => {
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = contactForm.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'Message Sent Successfully!';
+            btn.style.background = '#10b981';
+            btn.style.color = '#000';
+            contactForm.reset();
+            
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.background = '';
+                btn.style.color = '';
+            }, 3500);
+        });
+    }
+};
+
 // Start
 document.addEventListener('DOMContentLoaded', () => {
     initThree();
     initAnimations();
+    initMobileNav();
+    initContactForm();
+    lucide.createIcons();
 });
-
-// Contact Form Mockup
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const btn = contactForm.querySelector('button');
-        const originalText = btn.innerText;
-        btn.innerText = 'Message Sent!';
-        btn.style.background = '#10b981';
-        btn.style.color = '#fff';
-        contactForm.reset();
-        
-        setTimeout(() => {
-            btn.innerText = originalText;
-            btn.style.background = '';
-            btn.style.color = '';
-        }, 3000);
-    });
-}
